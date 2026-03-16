@@ -1,6 +1,17 @@
 import { QueryClient, QueryFunction } from "@tanstack/react-query";
 
-const API_BASE = "__PORT_5000__".startsWith("__") ? "" : "__PORT_5000__";
+const PORT_PROXY = "__PORT_5000__".startsWith("__") ? "" : "__PORT_5000__";
+
+// When deployed to GitHub Pages (no Express server), resolve API paths
+// against the Vite base URL so /api/stats becomes /bankstrs/api/stats.
+// When running with Express locally, PORT_PROXY or "" works fine.
+function getApiBase(): string {
+  if (PORT_PROXY) return PORT_PROXY;
+  const base = import.meta.env.BASE_URL || "/";
+  // Strip trailing slash so we can prepend to /api/...
+  return base.endsWith("/") ? base.slice(0, -1) : base;
+}
+const API_BASE = getApiBase();
 
 async function throwIfResNotOk(res: Response) {
   if (!res.ok) {
@@ -30,7 +41,8 @@ export const getQueryFn: <T>(options: {
 }) => QueryFunction<T> =
   ({ on401: unauthorizedBehavior }) =>
   async ({ queryKey }) => {
-    const res = await fetch(`${API_BASE}${queryKey.join("/")}`);
+    const url = queryKey.join("/");
+    const res = await fetch(`${API_BASE}${url}`);
 
     if (unauthorizedBehavior === "returnNull" && res.status === 401) {
       return null;
