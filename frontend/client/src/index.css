@@ -404,6 +404,12 @@ body::before {
     text-shadow: 0 0 8px var(--neon-green-glow);
   }
 
+  /* Bankstr coin — floating orange smiley */
+  .bankstr-coin {
+    filter: drop-shadow(0 20px 30px rgba(0,0,0,0.8)) drop-shadow(0 0 20px rgba(255, 77, 0, 0.2));
+    animation: float 6s ease-in-out infinite;
+  }
+
   /* Orange dot indicator (logo) */
   .logo-dot {
     width: 8px;

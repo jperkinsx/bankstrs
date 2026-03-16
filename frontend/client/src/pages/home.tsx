@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { Link } from "wouter";
 import { Countdown } from "@/components/Countdown";
 import { PerplexityAttribution } from "@/components/PerplexityAttribution";
+import { BankstrCoin } from "@/components/BankstrCoin";
 import type { Bankstr, Stats } from "@shared/schema";
 
 export default function Home() {
@@ -22,6 +23,9 @@ export default function Home() {
         </h1>
         <p className="mt-3 font-mono text-sm text-[var(--text-muted)]">
           10,000 days. One Bankstr per day. Zero-reserve auction.
+        </p>
+        <p className="mt-1 font-mono text-xs text-[var(--text-muted)] opacity-60">
+          Built on Rare Protocol + Bankr
         </p>
       </section>
 
@@ -57,9 +61,9 @@ export default function Home() {
             <div className="flex flex-col items-center gap-6 sm:flex-row">
               <div className="crt-screen flex h-48 w-48 shrink-0 items-center justify-center p-4">
                 <div className="crt-grid" />
-                <span className="font-mono text-xs text-[var(--neon-green)] relative z-[2]" style={{ textShadow: "0 0 4px var(--neon-green-glow)" }}>
-                  Bankstrs #{auction.day}
-                </span>
+                <div className="relative z-[2]">
+                  <BankstrCoin size={120} />
+                </div>
               </div>
               <div className="flex flex-col gap-3">
                 <h2 className="font-mono text-lg font-semibold text-[var(--text-bright)]">

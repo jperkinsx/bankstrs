@@ -3,6 +3,7 @@ import { Badge } from "@/components/ui/badge";
 import { Countdown } from "@/components/Countdown";
 import { BidForm } from "@/components/BidForm";
 import { PerplexityAttribution } from "@/components/PerplexityAttribution";
+import { BankstrCoin } from "@/components/BankstrCoin";
 import type { Bankstr } from "@shared/schema";
 
 function truncateAddress(addr: string | null): string {
@@ -82,9 +83,7 @@ export default function Auction() {
           {/* Subject + reticle */}
           <div className="relative z-[2] flex items-center justify-center">
             <div className="target-reticle" />
-            <span className="font-mono text-lg font-bold text-[var(--neon-green)]" style={{ textShadow: "0 0 12px var(--neon-green-glow)" }}>
-              #{auction.day}
-            </span>
+            <BankstrCoin size={180} />
           </div>
         </div>
 
