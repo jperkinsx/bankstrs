@@ -1,0 +1,27 @@
+name: Daily Bankstrs
+
+on:
+  schedule:
+    - cron: '0 12 * * *' # Noon UTC daily
+  workflow_dispatch: {} # Manual trigger
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - run: npm ci
+      - run: npm install -g @rareprotocol/rare-cli
+      - run: |
+          rare configure \
+            --chain sepolia \
+            --private-key ${{ secrets.DEPLOYER_PRIVATE_KEY }} \
+            --rpc-url ${{ secrets.RPC_URL }}
+      - run: node orchestrator/run.js
+        env:
+          BANKR_API_KEY: ${{ secrets.BANKR_API_KEY }}
+          BANKSTR_CONTRACT: ${{ secrets.BANKSTR_CONTRACT }}
+          DAY_OFFSET: '0'
