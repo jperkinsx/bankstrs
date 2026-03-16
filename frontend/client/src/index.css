@@ -2,80 +2,99 @@
 @tailwind components;
 @tailwind utilities;
 
-/* LIGHT MODE */
+/* ── Cyberdeck / CRT color system ── */
 :root {
   --button-outline: rgba(0,0,0, .10);
   --badge-outline: rgba(0,0,0, .05);
   --opaque-button-border-intensity: -8;
   --elevate-1: rgba(0,0,0, .03);
   --elevate-2: rgba(0,0,0, .08);
-  --background: 220 25% 97%;
-  --foreground: 220 25% 8%;
-  --border: 220 10% 88%;
-  --card: 220 20% 99%;
-  --card-foreground: 220 25% 8%;
-  --card-border: 220 10% 90%;
-  --sidebar: 220 20% 95%;
-  --sidebar-foreground: 220 25% 8%;
-  --sidebar-border: 220 10% 88%;
-  --sidebar-primary: 160 80% 32%;
-  --sidebar-primary-foreground: 0 0% 100%;
-  --sidebar-accent: 160 20% 92%;
-  --sidebar-accent-foreground: 220 25% 8%;
-  --sidebar-ring: 160 80% 32%;
-  --popover: 220 20% 96%;
-  --popover-foreground: 220 25% 8%;
-  --popover-border: 220 10% 88%;
-  --primary: 160 80% 32%;
-  --primary-foreground: 0 0% 100%;
-  --secondary: 220 15% 92%;
-  --secondary-foreground: 220 25% 8%;
-  --muted: 220 10% 93%;
-  --muted-foreground: 220 10% 42%;
-  --accent: 160 20% 92%;
-  --accent-foreground: 220 25% 8%;
-  --destructive: 0 80% 50%;
+
+  /* Map to cyberdeck palette — light mode fallback (unused since .dark is forced) */
+  --background: 240 5% 7%;
+  --foreground: 240 5% 83%;
+  --border: 240 3% 17%;
+  --card: 240 4% 12%;
+  --card-foreground: 240 5% 83%;
+  --card-border: 240 3% 15%;
+  --sidebar: 240 4% 10%;
+  --sidebar-foreground: 240 5% 83%;
+  --sidebar-border: 240 3% 17%;
+  --sidebar-primary: 130 100% 54%;
+  --sidebar-primary-foreground: 240 5% 7%;
+  --sidebar-accent: 240 3% 17%;
+  --sidebar-accent-foreground: 240 5% 83%;
+  --sidebar-ring: 130 100% 54%;
+  --popover: 240 4% 10%;
+  --popover-foreground: 240 5% 83%;
+  --popover-border: 240 3% 17%;
+  --primary: 130 100% 54%;
+  --primary-foreground: 240 5% 7%;
+  --secondary: 240 3% 17%;
+  --secondary-foreground: 240 5% 83%;
+  --muted: 240 2% 18%;
+  --muted-foreground: 240 2% 45%;
+  --accent: 240 3% 17%;
+  --accent-foreground: 240 5% 83%;
+  --destructive: 18 100% 50%;
   --destructive-foreground: 0 0% 100%;
-  --input: 220 10% 78%;
-  --ring: 160 80% 32%;
-  --chart-1: 160 80% 32%;
-  --chart-2: 200 70% 45%;
+  --input: 240 2% 18%;
+  --ring: 130 100% 54%;
+  --chart-1: 130 100% 54%;
+  --chart-2: 18 100% 50%;
   --chart-3: 280 60% 50%;
   --chart-4: 45 80% 50%;
   --chart-5: 30 85% 55%;
-  --font-sans: 'Satoshi', sans-serif;
+  --font-sans: 'Space Grotesk', sans-serif;
   --font-serif: Georgia, serif;
   --font-mono: 'JetBrains Mono', monospace;
   --radius: .5rem;
-  --shadow-2xs: 0px 2px 0px 0px hsl(0 0% 0% / 0.00);
-  --shadow-xs: 0px 2px 0px 0px hsl(0 0% 0% / 0.00);
-  --shadow-sm: 0px 2px 0px 0px hsl(0 0% 0% / 0.00), 0px 1px 2px -1px hsl(0 0% 0% / 0.00);
-  --shadow: 0px 2px 0px 0px hsl(0 0% 0% / 0.00), 0px 1px 2px -1px hsl(0 0% 0% / 0.00);
-  --shadow-md: 0px 2px 0px 0px hsl(0 0% 0% / 0.00), 0px 2px 4px -1px hsl(0 0% 0% / 0.00);
-  --shadow-lg: 0px 2px 0px 0px hsl(0 0% 0% / 0.00), 0px 4px 6px -1px hsl(0 0% 0% / 0.00);
-  --shadow-xl: 0px 2px 0px 0px hsl(0 0% 0% / 0.00), 0px 8px 10px -1px hsl(0 0% 0% / 0.00);
-  --shadow-2xl: 0px 2px 0px 0px hsl(0 0% 0% / 0.00);
+
+  /* Cyberdeck shadows */
+  --shadow-elevated: 8px 12px 24px rgba(0,0,0,0.6), -2px -2px 6px rgba(255,255,255,0.03), inset 1px 1px 1px rgba(255,255,255,0.05);
+  --shadow-recessed: inset 6px 8px 16px rgba(0,0,0,0.8), inset -1px -1px 2px rgba(255,255,255,0.04);
+  --shadow-button: 4px 6px 12px rgba(0,0,0,0.5), inset 1px 1px 2px rgba(255,255,255,0.1), inset -1px -1px 2px rgba(0,0,0,0.4);
+  --shadow-button-pressed: 1px 2px 4px rgba(0,0,0,0.8), inset 2px 4px 8px rgba(0,0,0,0.6), inset -1px -1px 1px rgba(255,255,255,0.05);
+
+  /* Raw palette for use in utility classes */
+  --chassis-base: #1c1c1e;
+  --chassis-dark: #121214;
+  --chassis-light: #2a2a2d;
+  --screen-bg: #030a05;
+  --screen-glare: rgba(57, 255, 20, 0.03);
+  --neon-green: #39ff14;
+  --neon-green-dim: #1a7a0b;
+  --neon-green-glow: rgba(57, 255, 20, 0.4);
+  --molded-orange: #ff4d00;
+  --molded-orange-light: #ff7a00;
+  --molded-orange-dark: #cc3d00;
+  --text-muted: #6e6e73;
+  --text-bright: #d2d2d7;
+
+  /* zero out default shadows */
+  --shadow-2xs: 0px 0px 0px 0px transparent;
+  --shadow-xs: 0px 0px 0px 0px transparent;
+  --shadow-sm: 0px 0px 0px 0px transparent;
+  --shadow: 0px 0px 0px 0px transparent;
+  --shadow-md: 0px 0px 0px 0px transparent;
+  --shadow-lg: 0px 0px 0px 0px transparent;
+  --shadow-xl: 0px 0px 0px 0px transparent;
+  --shadow-2xl: 0px 0px 0px 0px transparent;
   --tracking-normal: 0em;
   --spacing: 0.25rem;
 
   --sidebar-primary-border: hsl(var(--sidebar-primary));
   --sidebar-primary-border: hsl(from hsl(var(--sidebar-primary)) h s calc(l + var(--opaque-button-border-intensity)) / alpha);
-
   --sidebar-accent-border: hsl(var(--sidebar-accent));
   --sidebar-accent-border: hsl(from hsl(var(--sidebar-accent)) h s calc(l + var(--opaque-button-border-intensity)) / alpha);
-
   --primary-border: hsl(var(--primary));
   --primary-border: hsl(from hsl(var(--primary)) h s calc(l + var(--opaque-button-border-intensity)) / alpha);
-
   --secondary-border: hsl(var(--secondary));
   --secondary-border: hsl(from hsl(var(--secondary)) h s calc(l + var(--opaque-button-border-intensity)) / alpha);
-
   --muted-border: hsl(var(--muted));
   --muted-border: hsl(from hsl(var(--muted)) h s calc(l + var(--opaque-button-border-intensity)) / alpha);
-
   --accent-border: hsl(var(--accent));
   --accent-border: hsl(from hsl(var(--accent)) h s calc(l + var(--opaque-button-border-intensity)) / alpha);
-
   --destructive-border: hsl(var(--destructive));
   --destructive-border: hsl(from hsl(var(--destructive)) h s calc(l + var(--opaque-button-border-intensity)) / alpha);
 }
@@ -86,69 +105,89 @@
   --opaque-button-border-intensity: 9;
   --elevate-1: rgba(255,255,255, .04);
   --elevate-2: rgba(255,255,255, .09);
-  --background: 220 25% 5%;
-  --foreground: 0 0% 95%;
-  --border: 220 15% 14%;
-  --card: 220 22% 8%;
-  --card-foreground: 0 0% 95%;
-  --card-border: 220 15% 12%;
-  --sidebar: 220 22% 7%;
-  --sidebar-foreground: 0 0% 95%;
-  --sidebar-border: 220 15% 14%;
-  --sidebar-primary: 160 100% 42%;
-  --sidebar-primary-foreground: 220 25% 5%;
-  --sidebar-accent: 220 12% 16%;
-  --sidebar-accent-foreground: 0 0% 95%;
-  --sidebar-ring: 160 100% 42%;
-  --popover: 220 20% 10%;
-  --popover-foreground: 0 0% 95%;
-  --popover-border: 220 15% 16%;
-  --primary: 160 100% 42%;
-  --primary-foreground: 220 25% 5%;
-  --secondary: 220 15% 14%;
-  --secondary-foreground: 0 0% 95%;
-  --muted: 220 12% 18%;
-  --muted-foreground: 220 8% 58%;
-  --accent: 220 12% 16%;
-  --accent-foreground: 0 0% 95%;
-  --destructive: 0 80% 50%;
+
+  /* chassis-dark → background */
+  --background: 240 5% 7%;
+  /* text-bright → foreground */
+  --foreground: 240 5% 83%;
+  /* chassis-light → border */
+  --border: 240 3% 17%;
+  /* chassis-base → card */
+  --card: 240 4% 12%;
+  --card-foreground: 240 5% 83%;
+  --card-border: 240 3% 15%;
+  --sidebar: 240 4% 10%;
+  --sidebar-foreground: 240 5% 83%;
+  --sidebar-border: 240 3% 17%;
+  --sidebar-primary: 130 100% 54%;
+  --sidebar-primary-foreground: 240 5% 7%;
+  --sidebar-accent: 240 3% 17%;
+  --sidebar-accent-foreground: 240 5% 83%;
+  --sidebar-ring: 130 100% 54%;
+  --popover: 240 4% 10%;
+  --popover-foreground: 240 5% 83%;
+  --popover-border: 240 3% 17%;
+  /* neon-green → primary: ~130 100% 54% */
+  --primary: 130 100% 54%;
+  --primary-foreground: 240 5% 7%;
+  --secondary: 240 3% 17%;
+  --secondary-foreground: 240 5% 83%;
+  /* chassis-light → muted */
+  --muted: 240 2% 18%;
+  /* text-muted → muted-foreground */
+  --muted-foreground: 240 2% 45%;
+  --accent: 240 3% 17%;
+  --accent-foreground: 240 5% 83%;
+  /* molded-orange → destructive */
+  --destructive: 18 100% 50%;
   --destructive-foreground: 0 0% 100%;
-  --input: 220 12% 24%;
-  --ring: 160 100% 42%;
-  --chart-1: 160 100% 50%;
-  --chart-2: 200 80% 60%;
-  --chart-3: 280 70% 65%;
-  --chart-4: 45 85% 60%;
-  --chart-5: 30 90% 65%;
-  --shadow-2xs: 0px 2px 0px 0px hsl(0 0% 0% / 0.00);
-  --shadow-xs: 0px 2px 0px 0px hsl(0 0% 0% / 0.00);
-  --shadow-sm: 0px 2px 0px 0px hsl(0 0% 0% / 0.00), 0px 1px 2px -1px hsl(0 0% 0% / 0.00);
-  --shadow: 0px 2px 0px 0px hsl(0 0% 0% / 0.00), 0px 1px 2px -1px hsl(0 0% 0% / 0.00);
-  --shadow-md: 0px 2px 0px 0px hsl(0 0% 0% / 0.00), 0px 2px 4px -1px hsl(0 0% 0% / 0.00);
-  --shadow-lg: 0px 2px 0px 0px hsl(0 0% 0% / 0.00), 0px 4px 6px -1px hsl(0 0% 0% / 0.00);
-  --shadow-xl: 0px 2px 0px 0px hsl(0 0% 0% / 0.00), 0px 8px 10px -1px hsl(0 0% 0% / 0.00);
-  --shadow-2xl: 0px 2px 0px 0px hsl(0 0% 0% / 0.00);
+  --input: 240 2% 18%;
+  --ring: 130 100% 54%;
+  --chart-1: 130 100% 54%;
+  --chart-2: 18 100% 50%;
+  --chart-3: 280 60% 50%;
+  --chart-4: 45 80% 50%;
+  --chart-5: 30 85% 55%;
+
+  --shadow-2xs: 0px 0px 0px 0px transparent;
+  --shadow-xs: 0px 0px 0px 0px transparent;
+  --shadow-sm: 0px 0px 0px 0px transparent;
+  --shadow: 0px 0px 0px 0px transparent;
+  --shadow-md: 0px 0px 0px 0px transparent;
+  --shadow-lg: 0px 0px 0px 0px transparent;
+  --shadow-xl: 0px 0px 0px 0px transparent;
+  --shadow-2xl: 0px 0px 0px 0px transparent;
 
   --sidebar-primary-border: hsl(var(--sidebar-primary));
   --sidebar-primary-border: hsl(from hsl(var(--sidebar-primary)) h s calc(l + var(--opaque-button-border-intensity)) / alpha);
-
   --sidebar-accent-border: hsl(var(--sidebar-accent));
   --sidebar-accent-border: hsl(from hsl(var(--sidebar-accent)) h s calc(l + var(--opaque-button-border-intensity)) / alpha);
-
   --primary-border: hsl(var(--primary));
   --primary-border: hsl(from hsl(var(--primary)) h s calc(l + var(--opaque-button-border-intensity)) / alpha);
-
   --secondary-border: hsl(var(--secondary));
   --secondary-border: hsl(from hsl(var(--secondary)) h s calc(l + var(--opaque-button-border-intensity)) / alpha);
-
   --muted-border: hsl(var(--muted));
   --muted-border: hsl(from hsl(var(--muted)) h s calc(l + var(--opaque-button-border-intensity)) / alpha);
-
   --accent-border: hsl(var(--accent));
   --accent-border: hsl(from hsl(var(--accent)) h s calc(l + var(--opaque-button-border-intensity)) / alpha);
-
   --destructive-border: hsl(var(--destructive));
   --destructive-border: hsl(from hsl(var(--destructive)) h s calc(l + var(--opaque-button-border-intensity)) / alpha);
+}
+
+/* ── CRT scanline overlay ── */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(rgba(18,16,16,0) 50%, rgba(0,0,0,0.25) 50%),
+              linear-gradient(90deg, rgba(255,0,0,0.06), rgba(0,255,0,0.02), rgba(0,0,255,0.06));
+  background-size: 100% 4px, 6px 100%;
+  z-index: 100;
+  pointer-events: none;
+  opacity: 0.3;
 }
 
 @layer base {
@@ -157,7 +196,222 @@
   }
 
   body {
-    @apply font-sans antialiased bg-background text-foreground;
+    @apply font-sans antialiased text-foreground;
+    background-color: #0a0a0c;
+    background-image: radial-gradient(circle at 50% 50%, #1a1a1c 0%, #050505 100%);
+  }
+}
+
+/* ── Keyframe animations ── */
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+@keyframes rotate-slow {
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-10px) scale(1.02); }
+}
+
+@keyframes pulse-border {
+  0%, 100% { border-color: rgba(57, 255, 20, 0.3); }
+  50% { border-color: var(--neon-green); }
+}
+
+/* ── Reusable cyberdeck utility classes ── */
+@layer components {
+  /* Module block — the "card" replacement */
+  .module-block {
+    background: var(--chassis-base);
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: var(--shadow-elevated);
+    border: 1px solid rgba(255,255,255,0.02);
+  }
+
+  /* Module header — flex between label and status light */
+  .module-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+  }
+
+  /* Hardware label — tiny uppercase muted text */
+  .hardware-label {
+    font-size: 0.65rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 700;
+  }
+
+  /* Status light — blinking green indicator */
+  .status-light {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--neon-green);
+    box-shadow: 0 0 8px var(--neon-green);
+    animation: blink 2s steps(2, start) infinite;
+  }
+
+  /* Recessed display — for data readouts */
+  .recessed-display {
+    background: #0a0a0a;
+    padding: 12px 16px;
+    border-radius: 8px;
+    box-shadow: var(--shadow-recessed);
+    border: 1px solid #1a1a1a;
+  }
+
+  /* Physical button */
+  .btn-physical {
+    background: var(--chassis-light);
+    border: none;
+    border-radius: 12px;
+    padding: 12px 20px;
+    color: var(--text-bright);
+    font-family: var(--font-sans);
+    font-weight: 700;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    box-shadow: var(--shadow-button);
+    cursor: pointer;
+    transition: all 0.1s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .btn-physical:active {
+    transform: translateY(4px);
+    box-shadow: var(--shadow-button-pressed);
+  }
+
+  .btn-physical.btn-primary {
+    background: linear-gradient(145deg, #2a2a2d, #1f1f22);
+    color: var(--neon-green);
+    text-shadow: 0 0 8px var(--neon-green-glow);
+  }
+
+  /* CRT screen area */
+  .crt-screen {
+    background-color: var(--screen-bg);
+    border-radius: 12px;
+    box-shadow: var(--shadow-recessed);
+    position: relative;
+    overflow: hidden;
+    border: 1px solid #112211;
+  }
+
+  /* CRT grid overlay inside crt-screen */
+  .crt-grid {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background-image:
+      linear-gradient(var(--neon-green-dim) 1px, transparent 1px),
+      linear-gradient(90deg, var(--neon-green-dim) 1px, transparent 1px);
+    background-size: 40px 40px;
+    opacity: 0.1;
+    pointer-events: none;
+  }
+
+  /* CRT glare overlay */
+  .crt-glare {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: radial-gradient(circle, var(--screen-glare) 0%, rgba(0,0,0,0.6) 100%);
+    pointer-events: none;
+    z-index: 10;
+  }
+
+  /* CLI layer for trait overlays */
+  .cli-layer {
+    position: absolute;
+    top: 16px; left: 16px; right: 16px; bottom: 16px;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--neon-green);
+    text-shadow: 0 0 4px var(--neon-green-glow);
+    z-index: 5;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    pointer-events: none;
+  }
+
+  /* Target reticle animation */
+  .target-reticle {
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    border: 1px dashed var(--neon-green-dim);
+    border-radius: 50%;
+    animation: rotate-slow 20s linear infinite;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+  }
+
+  .target-reticle::before,
+  .target-reticle::after {
+    content: '';
+    position: absolute;
+    background: var(--neon-green);
+  }
+
+  .target-reticle::before {
+    top: -5px;
+    left: 50%;
+    width: 2px;
+    height: 10px;
+    transform: translateX(-50%);
+    box-shadow: 0 200px 0 var(--neon-green);
+  }
+
+  .target-reticle::after {
+    left: -5px;
+    top: 50%;
+    height: 2px;
+    width: 10px;
+    transform: translateY(-50%);
+    box-shadow: 200px 0 0 var(--neon-green);
+  }
+
+  /* Orange counter digit */
+  .counter-digit {
+    background: rgba(255, 77, 0, 0.05);
+    padding: 4px 8px;
+    border-radius: 4px;
+    border: 1px solid rgba(255, 77, 0, 0.1);
+    font-family: var(--font-mono);
+    font-weight: 800;
+    color: var(--molded-orange);
+    text-shadow: 0 0 10px rgba(255, 77, 0, 0.3);
+  }
+
+  /* Neon green text glow */
+  .text-glow-green {
+    color: var(--neon-green);
+    text-shadow: 0 0 8px var(--neon-green-glow);
+  }
+
+  /* Orange dot indicator (logo) */
+  .logo-dot {
+    width: 8px;
+    height: 8px;
+    background: var(--molded-orange);
+    border-radius: 50%;
+    box-shadow: 0 0 10px var(--molded-orange), inset 1px 1px 2px rgba(255,255,255,0.5);
+    display: inline-block;
   }
 }
 

@@ -1,5 +1,4 @@
 import { useQuery } from "@tanstack/react-query";
-import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { PerplexityAttribution } from "@/components/PerplexityAttribution";
 import type { Bankstr } from "@shared/schema";
@@ -16,11 +15,11 @@ export default function Gallery() {
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-12">
-      <h1 className="mb-8 font-mono text-xl font-bold text-foreground">Gallery</h1>
+      <h1 className="mb-8 font-mono text-xl font-bold text-[var(--text-bright)]">Gallery</h1>
 
       {isLoading && (
         <div className="flex min-h-[40vh] items-center justify-center">
-          <span className="font-mono text-sm text-muted-foreground">Loading...</span>
+          <span className="font-mono text-sm text-[var(--text-muted)]">Loading...</span>
         </div>
       )}
 
@@ -29,35 +28,42 @@ export default function Gallery() {
         className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
       >
         {gallery?.map((bankstr) => (
-          <Card key={bankstr.day} data-testid={`gallery-card-${bankstr.day}`}>
-            <div className="flex aspect-square items-center justify-center border-b border-border bg-muted">
-              <span className="font-mono text-xs text-muted-foreground">
+          <div key={bankstr.day} data-testid={`gallery-card-${bankstr.day}`} className="module-block p-0 overflow-hidden">
+            <div className="crt-screen relative flex aspect-square items-center justify-center" style={{ borderRadius: "20px 20px 0 0" }}>
+              <div className="crt-grid" />
+              <span className="font-mono text-xs text-[var(--neon-green)] relative z-[2]" style={{ textShadow: "0 0 4px var(--neon-green-glow)" }}>
                 #{bankstr.day}
               </span>
             </div>
-            <CardContent className="space-y-2 p-4">
+            <div className="space-y-2 p-4">
               <div className="flex items-center justify-between">
-                <span className="font-mono text-sm font-semibold text-foreground">
+                <span className="font-mono text-sm font-semibold text-[var(--text-bright)]">
                   Bankstrs #{bankstr.day}
                 </span>
-                <Badge variant={bankstr.settled ? "secondary" : "default"}>
-                  {bankstr.settled ? "Settled" : "Active"}
-                </Badge>
+                {bankstr.settled ? (
+                  <Badge variant="outline" className="border-[var(--text-muted)] text-[var(--text-muted)]">
+                    Settled
+                  </Badge>
+                ) : (
+                  <Badge variant="outline" className="border-[var(--neon-green-dim)] text-[var(--neon-green)]" style={{ textShadow: "0 0 4px var(--neon-green-glow)" }}>
+                    Active
+                  </Badge>
+                )}
               </div>
               <div className="flex flex-wrap gap-1">
                 {Object.entries(bankstr.traits)
                   .slice(0, 3)
                   .map(([key, value]) => (
-                    <Badge key={key} variant="outline" className="text-[10px]">
+                    <Badge key={key} variant="outline" className="text-[10px] border-[var(--neon-green-dim)] text-[var(--neon-green)] bg-transparent">
                       {value}
                     </Badge>
                   ))}
               </div>
-              <p className="font-mono text-xs text-muted-foreground">
+              <p className="font-mono text-xs text-[var(--text-muted)]">
                 {truncateAddress(bankstr.owner)}
               </p>
-            </CardContent>
-          </Card>
+            </div>
+          </div>
         ))}
       </div>
 

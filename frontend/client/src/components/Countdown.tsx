@@ -4,11 +4,12 @@ interface CountdownProps {
   endTime: number;
 }
 
-function formatTime(seconds: number): string {
+function getDigits(seconds: number): string[] {
   const h = Math.floor(seconds / 3600);
   const m = Math.floor((seconds % 3600) / 60);
   const s = seconds % 60;
-  return `${String(h).padStart(2, "0")}:${String(m).padStart(2, "0")}:${String(s).padStart(2, "0")}`;
+  const str = `${String(h).padStart(2, "0")}:${String(m).padStart(2, "0")}:${String(s).padStart(2, "0")}`;
+  return str.split("");
 }
 
 export function Countdown({ endTime }: CountdownProps) {
@@ -28,15 +29,25 @@ export function Countdown({ endTime }: CountdownProps) {
 
   if (remaining <= 0) {
     return (
-      <span data-testid="countdown" className="font-mono text-lg text-destructive">
+      <span data-testid="countdown" className="font-mono text-lg font-extrabold text-[var(--molded-orange)]" style={{ textShadow: "0 0 10px rgba(255, 77, 0, 0.3)" }}>
         ENDED
       </span>
     );
   }
 
+  const digits = getDigits(remaining);
+
   return (
-    <span data-testid="countdown" className="font-mono text-lg text-primary">
-      {formatTime(remaining)}
+    <span data-testid="countdown" className="inline-flex items-center gap-0.5 font-mono text-lg">
+      {digits.map((d, i) =>
+        d === ":" ? (
+          <span key={i} className="mx-0.5 font-extrabold text-[var(--molded-orange)]" style={{ textShadow: "0 0 10px rgba(255, 77, 0, 0.3)" }}>:</span>
+        ) : (
+          <span key={i} className="counter-digit text-lg">
+            {d}
+          </span>
+        )
+      )}
     </span>
   );
 }

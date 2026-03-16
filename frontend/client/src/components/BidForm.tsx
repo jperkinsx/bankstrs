@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useWriteContract, useAccount } from "wagmi";
 import { parseEther } from "viem";
-import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { BAZAAR_ADDRESS, BAZAAR_ABI, NFT_CONTRACT } from "@/lib/contracts";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
@@ -37,7 +36,7 @@ export function BidForm({ tokenId, currentBid, auctionEnded }: BidFormProps) {
   if (!isConnected) {
     return (
       <div data-testid="bid-form-connect" className="space-y-3">
-        <p className="text-sm text-muted-foreground">
+        <p className="text-sm text-[var(--text-muted)]">
           Connect wallet to place a bid
         </p>
         <ConnectButton />
@@ -47,8 +46,8 @@ export function BidForm({ tokenId, currentBid, auctionEnded }: BidFormProps) {
 
   return (
     <div data-testid="bid-form" className="space-y-3">
-      <div className="text-sm text-muted-foreground">
-        Current bid: <span className="font-mono text-foreground">{currentBid} ETH</span>
+      <div className="text-sm text-[var(--text-muted)]">
+        Current bid: <span className="font-mono text-[var(--neon-green)]" style={{ textShadow: "0 0 8px var(--neon-green-glow)" }}>{currentBid} ETH</span>
       </div>
       <div className="flex gap-2">
         <Input
@@ -60,22 +59,25 @@ export function BidForm({ tokenId, currentBid, auctionEnded }: BidFormProps) {
           value={amount}
           onChange={(e) => setAmount(e.target.value)}
           disabled={auctionEnded || isPending}
+          className="bg-[#0a0a0a] border-[#1a1a1a] font-mono text-[var(--neon-green)]"
+          style={{ boxShadow: "var(--shadow-recessed)" }}
         />
-        <Button
+        <button
           data-testid="bid-button"
           onClick={handleBid}
           disabled={auctionEnded || isPending || !amount}
+          className="btn-physical btn-primary px-6 py-3 disabled:opacity-40 disabled:cursor-not-allowed"
         >
           {isPending ? "Bidding..." : auctionEnded ? "Ended" : "Place Bid"}
-        </Button>
+        </button>
       </div>
       {isSuccess && (
-        <p data-testid="bid-success" className="text-sm text-primary">
+        <p data-testid="bid-success" className="text-sm text-[var(--neon-green)]" style={{ textShadow: "0 0 6px var(--neon-green-glow)" }}>
           Bid placed successfully!
         </p>
       )}
       {isError && (
-        <p data-testid="bid-error" className="text-sm text-destructive">
+        <p data-testid="bid-error" className="text-sm text-[var(--molded-orange)]">
           {error?.message?.slice(0, 100) || "Bid failed"}
         </p>
       )}

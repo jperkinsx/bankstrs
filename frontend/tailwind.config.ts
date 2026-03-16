@@ -83,7 +83,7 @@ export default {
         },
       },
       fontFamily: {
-        sans: ["Satoshi", "var(--font-sans)", "sans-serif"],
+        sans: ["Space Grotesk", "var(--font-sans)", "sans-serif"],
         serif: ["var(--font-serif)"],
         mono: ["JetBrains Mono", "var(--font-mono)", "monospace"],
       },

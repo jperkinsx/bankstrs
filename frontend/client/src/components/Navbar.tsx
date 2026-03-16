@@ -19,11 +19,13 @@ export function Navbar() {
   return (
     <nav
       data-testid="navbar"
-      className="fixed top-0 left-0 right-0 z-50 border-b border-border bg-background/80 backdrop-blur-md"
+      className="fixed top-0 left-0 right-0 z-50 border-b-2 border-[var(--chassis-dark)] bg-[var(--chassis-dark)]/90 backdrop-blur-md"
+      style={{ boxShadow: "0 2px 0 rgba(255,255,255,0.02)" }}
     >
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4">
         <Link href="/" data-testid="navbar-logo">
-          <span className="font-mono text-lg font-bold tracking-wider text-primary">
+          <span className="flex items-center gap-2 text-lg font-bold uppercase tracking-widest text-[var(--text-muted)]">
+            <span className="logo-dot" />
             BANKSTRS
           </span>
         </Link>
@@ -35,10 +37,10 @@ export function Navbar() {
               href={link.href}
               data-testid={`nav-link-${link.label.toLowerCase()}`}
               className={cn(
-                "text-sm font-medium transition-colors hover:text-primary",
+                "text-sm font-medium uppercase tracking-wider transition-colors",
                 location === link.href
-                  ? "text-primary"
-                  : "text-muted-foreground"
+                  ? "text-glow-green"
+                  : "text-[var(--text-muted)] hover:text-[var(--neon-green)]"
               )}
             >
               {link.label}
@@ -66,7 +68,7 @@ export function Navbar() {
       </div>
 
       {mobileOpen && (
-        <div className="border-t border-border bg-background px-4 pb-4 md:hidden">
+        <div className="border-t border-[var(--chassis-dark)] bg-[var(--chassis-dark)] px-4 pb-4 md:hidden">
           <div className="flex flex-col gap-3 pt-3">
             {NAV_LINKS.map((link) => (
               <Link
@@ -74,10 +76,10 @@ export function Navbar() {
                 href={link.href}
                 data-testid={`nav-link-mobile-${link.label.toLowerCase()}`}
                 className={cn(
-                  "text-sm font-medium transition-colors hover:text-primary",
+                  "text-sm font-medium uppercase tracking-wider transition-colors",
                   location === link.href
-                    ? "text-primary"
-                    : "text-muted-foreground"
+                    ? "text-glow-green"
+                    : "text-[var(--text-muted)] hover:text-[var(--neon-green)]"
                 )}
                 onClick={() => setMobileOpen(false)}
               >

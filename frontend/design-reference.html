@@ -1,0 +1,684 @@
+<html lang="en" vid="0"><head vid="1">
+    <meta charset="UTF-8" vid="2">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" vid="3">
+    <title vid="4">BANKSTR // v.10k.days</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" vid="5">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" vid="6">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700;800&amp;family=Space+Grotesk:wght@500;700&amp;display=swap" rel="stylesheet" vid="7">
+    <style vid="8">
+        
+
+        :root {
+            --chassis-base: #1c1c1e;
+            --chassis-dark: #121214;
+            --chassis-light: #2a2a2d;
+            
+            --screen-bg: #030a05;
+            --screen-glare: rgba(57, 255, 20, 0.03);
+            
+            --neon-green: #39ff14;
+            --neon-green-dim: #1a7a0b;
+            --neon-green-glow: rgba(57, 255, 20, 0.4);
+            
+            --molded-orange: #ff4d00;
+            --molded-orange-light: #ff7a00;
+            --molded-orange-dark: #cc3d00;
+            
+            --text-muted: #6e6e73;
+            --text-bright: #d2d2d7;
+
+            --shadow-elevated: 
+                8px 12px 24px rgba(0,0,0,0.6),
+                -2px -2px 6px rgba(255,255,255,0.03),
+                inset 1px 1px 1px rgba(255,255,255,0.05);
+                
+            --shadow-recessed: 
+                inset 6px 8px 16px rgba(0,0,0,0.8),
+                inset -1px -1px 2px rgba(255,255,255,0.04);
+                
+            --shadow-button: 
+                4px 6px 12px rgba(0,0,0,0.5),
+                inset 1px 1px 2px rgba(255,255,255,0.1),
+                inset -1px -1px 2px rgba(0,0,0,0.4);
+
+            --shadow-button-pressed: 
+                1px 2px 4px rgba(0,0,0,0.8),
+                inset 2px 4px 8px rgba(0,0,0,0.6),
+                inset -1px -1px 1px rgba(255,255,255,0.05);
+
+            --font-mono: 'JetBrains Mono', monospace;
+            --font-sans: 'Space Grotesk', sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            user-select: none;
+        }
+
+        body {
+            background-color: #0a0a0c;
+            background-image: radial-gradient(circle at 50% 50%, #1a1a1c 0%, #050505 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-sans);
+            color: var(--text-bright);
+            overflow: hidden;
+            perspective: 1000px;
+        }
+
+        
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+            background-size: 100% 4px, 6px 100%;
+            z-index: 100;
+            pointer-events: none;
+            opacity: 0.4;
+        }
+
+        
+        .cyberdeck {
+            width: 980px;
+            height: 600px;
+            background: var(--chassis-base);
+            border-radius: 32px;
+            padding: 32px;
+            box-shadow: 
+                20px 30px 60px rgba(0,0,0,0.8),
+                inset 2px 2px 4px rgba(255,255,255,0.04),
+                inset -4px -4px 12px rgba(0,0,0,0.6);
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            grid-template-rows: auto 1fr;
+            gap: 24px;
+            position: relative;
+            transform: rotateX(5deg) rotateY(-2deg);
+            transform-style: preserve-3d;
+        }
+
+        
+        .brand-plate {
+            grid-column: 1 / -1;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            padding-bottom: 12px;
+            border-bottom: 2px solid var(--chassis-dark);
+            box-shadow: 0 2px 0 rgba(255,255,255,0.02);
+        }
+
+        .logo {
+            font-weight: 700;
+            font-size: 1.2rem;
+            letter-spacing: 0.1em;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .logo-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--molded-orange);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--molded-orange), inset 1px 1px 2px rgba(255,255,255,0.5);
+        }
+
+        .sys-info {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        
+        .screen-bezel {
+            background: var(--chassis-dark);
+            border-radius: 20px;
+            padding: 16px;
+            box-shadow: var(--shadow-elevated);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .crt-display {
+            flex-grow: 1;
+            background-color: var(--screen-bg);
+            border-radius: 12px;
+            box-shadow: var(--shadow-recessed);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid #112211;
+            display: flex;
+            padding: 24px;
+        }
+
+        
+        .crt-display::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: radial-gradient(circle, var(--screen-glare) 0%, rgba(0,0,0,0.6) 100%);
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        
+        .crt-grid {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: 
+                linear-gradient(var(--neon-green-dim) 1px, transparent 1px),
+                linear-gradient(90deg, var(--neon-green-dim) 1px, transparent 1px);
+            background-size: 40px 40px;
+            opacity: 0.1;
+            pointer-events: none;
+        }
+
+        
+        .cli-layer {
+            position: absolute;
+            top: 24px; left: 24px; right: 24px; bottom: 24px;
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--neon-green);
+            text-shadow: 0 0 4px var(--neon-green-glow);
+            z-index: 5;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            pointer-events: none;
+        }
+
+        .cli-row {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .cli-block {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .cli-val { color: #fff; text-shadow: none; }
+        
+        .cli-alert {
+            border: 1px solid var(--neon-green);
+            padding: 4px 8px;
+            display: inline-block;
+            background: rgba(57, 255, 20, 0.1);
+            animation: pulse-border 2s infinite;
+        }
+
+        .bracket { opacity: 0.5; margin: 0 4px; }
+
+        @keyframes pulse-border {
+            0%, 100% { border-color: rgba(57, 255, 20, 0.3); }
+            50% { border-color: var(--neon-green); }
+        }
+
+        
+        .subject-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 280px;
+            height: 280px;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .target-reticle {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border: 1px dashed var(--neon-green-dim);
+            border-radius: 50%;
+            animation: rotate-slow 20s linear infinite;
+        }
+        
+        .target-reticle::before, .target-reticle::after {
+            content: '';
+            position: absolute;
+            background: var(--neon-green);
+        }
+        .target-reticle::before { top: -5px; left: 50%; width: 2px; height: 10px; transform: translateX(-50%); box-shadow: 0 280px 0 var(--neon-green); }
+        .target-reticle::after { left: -5px; top: 50%; height: 2px; width: 10px; transform: translateY(-50%); box-shadow: 280px 0 0 var(--neon-green); }
+
+        @keyframes rotate-slow {
+            100% { transform: rotate(360deg); }
+        }
+
+        
+        svg.coin {
+            width: 220px;
+            height: 220px;
+            filter: drop-shadow(0 20px 30px rgba(0,0,0,0.8)) drop-shadow(0 0 20px rgba(255, 77, 0, 0.2));
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-10px) scale(1.02); }
+        }
+
+        
+        .screen-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 16px;
+            padding: 0 8px;
+        }
+
+        .hardware-label {
+            font-size: 0.65rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-weight: 700;
+        }
+
+        .dials {
+            display: flex;
+            gap: 12px;
+        }
+
+        .dial {
+            width: 24px;
+            height: 24px;
+            background: var(--chassis-light);
+            border-radius: 50%;
+            box-shadow: var(--shadow-button);
+            position: relative;
+            cursor: pointer;
+        }
+
+        .dial::after {
+            content: '';
+            position: absolute;
+            top: 4px; left: 50%;
+            width: 2px; height: 6px;
+            background: var(--neon-green);
+            transform: translateX(-50%);
+            border-radius: 1px;
+            box-shadow: 0 0 4px var(--neon-green);
+        }
+
+        .dial:nth-child(2) { transform: rotate(45deg); }
+
+        
+        .control-deck {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        
+        .module-block {
+            background: var(--chassis-base);
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: var(--shadow-elevated);
+            border: 1px solid rgba(255,255,255,0.02);
+        }
+
+        .module-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .status-light {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--neon-green);
+            box-shadow: 0 0 8px var(--neon-green);
+            animation: blink 2s steps(2, start) infinite;
+        }
+
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+
+        
+        .day-counter {
+            background: #0a0a0a;
+            padding: 12px 16px;
+            border-radius: 8px;
+            box-shadow: var(--shadow-recessed);
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            border: 1px solid #1a1a1a;
+        }
+
+        .counter-label {
+            font-family: var(--font-mono);
+            font-size: 0.6rem;
+            color: var(--text-muted);
+        }
+
+        .counter-value {
+            font-family: var(--font-mono);
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--molded-orange);
+            letter-spacing: 0.1em;
+            text-shadow: 0 0 10px rgba(255, 77, 0, 0.3);
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .counter-digit {
+            background: rgba(255, 77, 0, 0.05);
+            padding: 2px 4px;
+            border-radius: 4px;
+            border: 1px solid rgba(255, 77, 0, 0.1);
+        }
+
+        
+        .action-pad {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-top: 24px;
+        }
+
+        .btn-physical {
+            background: var(--chassis-light);
+            border: none;
+            border-radius: 12px;
+            padding: 16px;
+            color: var(--text-bright);
+            font-family: var(--font-sans);
+            font-weight: 700;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            box-shadow: var(--shadow-button);
+            cursor: pointer;
+            transition: all 0.1s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            position: relative;
+        }
+
+        .btn-physical::before {
+            content: '';
+            width: 30px;
+            height: 4px;
+            border-radius: 2px;
+            background: var(--chassis-dark);
+            box-shadow: inset 0 1px 1px rgba(0,0,0,0.5), 0 1px 0 rgba(255,255,255,0.1);
+        }
+
+        .btn-physical:active {
+            transform: translateY(4px);
+            box-shadow: var(--shadow-button-pressed);
+        }
+
+        .btn-primary {
+            grid-column: 1 / -1;
+            background: linear-gradient(145deg, #2a2a2d, #1f1f22);
+            padding: 24px;
+            font-size: 1rem;
+            color: var(--neon-green);
+        }
+
+        .btn-primary::before {
+            background: var(--neon-green);
+            box-shadow: 0 0 10px var(--neon-green);
+        }
+        
+        .btn-primary:active::before {
+            box-shadow: 0 0 4px var(--neon-green);
+            opacity: 0.5;
+        }
+
+        
+        .vent-detail {
+            margin-top: auto;
+            display: grid;
+            grid-template-columns: repeat(8, 1fr);
+            gap: 4px;
+            padding: 12px;
+            opacity: 0.5;
+        }
+
+        .vent-hole {
+            width: 4px;
+            height: 4px;
+            background: #000;
+            border-radius: 50%;
+            box-shadow: inset 1px 1px 2px rgba(0,0,0,0.8), 1px 1px 1px rgba(255,255,255,0.05);
+        }
+
+        
+        .cursor {
+            display: inline-block;
+            width: 8px;
+            height: 12px;
+            background: var(--neon-green);
+            animation: blink 1s step-end infinite;
+            vertical-align: middle;
+            margin-left: 4px;
+        }
+
+        
+        .screw {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            background: #111;
+            border-radius: 50%;
+            box-shadow: inset 2px 2px 4px rgba(0,0,0,0.8), 1px 1px 1px rgba(255,255,255,0.05);
+        }
+        .screw::after {
+            content: '';
+            position: absolute;
+            top: 50%; left: 50%;
+            width: 6px; height: 2px;
+            background: #222;
+            transform: translate(-50%, -50%) rotate(45deg);
+        }
+        .s-tl { top: 16px; left: 16px; }
+        .s-tr { top: 16px; right: 16px; transform: rotate(20deg); }
+        .s-bl { bottom: 16px; left: 16px; transform: rotate(-15deg); }
+        .s-br { bottom: 16px; right: 16px; transform: rotate(60deg); }
+
+    </style>
+</head>
+<body vid="9">
+
+    <div class="cyberdeck" vid="10">
+        
+        <div class="screw s-tl" vid="11"></div>
+        <div class="screw s-tr" vid="12"></div>
+        <div class="screw s-bl" vid="13"></div>
+        <div class="screw s-br" vid="14"></div>
+
+        
+        <div class="brand-plate" vid="15">
+            <div class="logo" vid="16">
+                <div class="logo-dot" vid="17"></div>
+                BANKSTR
+            </div>
+            <div class="sys-info" vid="18">OS: BANKR.BOT // LINK: SECURE</div>
+        </div>
+
+        
+        <div class="screen-bezel" vid="19">
+            <div class="crt-display" vid="20">
+                <div class="crt-grid" vid="21"></div>
+                
+                
+                <div class="cli-layer" vid="22">
+                    <div class="cli-row" vid="23">
+                        <div class="cli-block" vid="24">
+                            <span vid="25">&gt; init sequence... <span class="cli-val" vid="26">OK</span></span>
+                            <span vid="27">&gt; loading model: <span class="cli-val" vid="28">BNK_10K</span></span>
+                        </div>
+                        <div class="cli-block" style="text-align: right;" vid="29">
+                            <span class="cli-alert" vid="30">EVOLVING</span>
+                        </div>
+                    </div>
+
+                    
+                    <div class="subject-container" vid="31">
+                        <div class="target-reticle" vid="32"></div>
+                        
+                        <svg class="coin" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" vid="33">
+                            <defs vid="34">
+                                
+                                <linearGradient id="bevelOuter" x1="0%" y1="0%" x2="100%" y2="100%" vid="35">
+                                    <stop offset="0%" stop-color="#ff9955" vid="36"></stop>
+                                    <stop offset="20%" stop-color="#ff4d00" vid="37"></stop>
+                                    <stop offset="80%" stop-color="#cc3d00" vid="38"></stop>
+                                    <stop offset="100%" stop-color="#661e00" vid="39"></stop>
+                                </linearGradient>
+                                
+                                
+                                <linearGradient id="faceBase" x1="0%" y1="0%" x2="0%" y2="100%" vid="40">
+                                    <stop offset="0%" stop-color="#ff6600" vid="41"></stop>
+                                    <stop offset="100%" stop-color="#e64500" vid="42"></stop>
+                                </linearGradient>
+
+                                
+                                <filter id="recessedPixel" vid="43">
+                                    <fedropshadow dx="0" dy="2" stdDeviation="1" flood-color="#ffffff" flood-opacity="0.2" vid="44"></fedropshadow>
+                                    <fedropshadow dx="0" dy="-2" stdDeviation="2" flood-color="#4a1500" flood-opacity="0.9" vid="45"></fedropshadow>
+                                    <feinnershadow dx="2" dy="2" stdDeviation="3" flood-color="#000000" flood-opacity="0.8" vid="46"></feinnershadow>
+                                </filter>
+
+                                
+                                <filter id="emboss" vid="47">
+                                    <fedropshadow dx="-1" dy="-1" stdDeviation="2" flood-color="#ffb880" flood-opacity="0.8" vid="48"></fedropshadow>
+                                    <fedropshadow dx="2" dy="4" stdDeviation="4" flood-color="#000000" flood-opacity="0.6" vid="49"></fedropshadow>
+                                </filter>
+                            </defs>
+
+                            
+                            <circle cx="100" cy="100" r="95" fill="url(#bevelOuter)" filter="url(#emboss)" vid="50"></circle>
+                            
+                            
+                            <circle cx="100" cy="100" r="75" fill="url(#faceBase)" stroke="#aa3300" stroke-width="2" vid="51"></circle>
+                            
+                            
+                            <g fill="#4a1500" filter="url(#recessedPixel)" vid="52">
+                                
+                                <rect x="70" y="70" width="15" height="15" rx="2" vid="53"></rect>
+                                <rect x="70" y="85" width="15" height="15" rx="2" vid="54"></rect>
+                                
+                                
+                                <rect x="115" y="70" width="15" height="15" rx="2" vid="55"></rect>
+                                <rect x="115" y="85" width="15" height="15" rx="2" vid="56"></rect>
+                                
+                                
+                                <rect x="60" y="115" width="15" height="15" rx="2" vid="57"></rect>
+                                <rect x="75" y="130" width="15" height="15" rx="2" vid="58"></rect>
+                                <rect x="90" y="130" width="15" height="15" rx="2" vid="59"></rect>
+                                <rect x="105" y="130" width="15" height="15" rx="2" vid="60"></rect>
+                                <rect x="125" y="115" width="15" height="15" rx="2" vid="61"></rect>
+                            </g>
+                            
+                            
+                            <circle cx="100" cy="100" r="95" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1" vid="62"></circle>
+                        </svg>
+                    </div>
+
+                    <div class="cli-row" vid="63">
+                        <div class="cli-block" vid="64">
+                            <span vid="65">SURFACE <span class="bracket" vid="66">[</span> <span class="cli-val" vid="67">MATTE_ORANGE</span> <span class="bracket" vid="68">]</span></span>
+                            <span vid="69">MOLDING <span class="bracket" vid="70">[</span> <span class="cli-val" vid="71">DEEP_RECESS</span> <span class="bracket" vid="72">]</span></span>
+                        </div>
+                        <div class="cli-block" style="text-align: right;" vid="73">
+                            <span vid="74">ECO_DATA: <span class="cli-val" vid="75">SYNCING...</span></span>
+                            <span vid="76">AWAITING INPUT<span class="cursor" vid="77"></span></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="screen-controls" vid="78">
+                <div class="hardware-label" vid="79">DISPLAY / CONTRAST</div>
+                <div class="dials" vid="80">
+                    <div class="dial" vid="81"></div>
+                    <div class="dial" vid="82"></div>
+                </div>
+            </div>
+        </div>
+
+        
+        <div class="control-deck" vid="83">
+            
+            
+            <div class="module-block" vid="84">
+                <div class="module-header" vid="85">
+                    <div class="hardware-label" vid="86">DURATION PROTOCOL</div>
+                    <div class="status-light" vid="87"></div>
+                </div>
+                
+                <div class="day-counter" vid="88">
+                    <div class="counter-label" vid="89">DAYS REMAINING</div>
+                    <div class="counter-value" vid="90">
+                        <span class="counter-digit" vid="91">0</span>
+                        <span class="counter-digit" vid="92">9</span>
+                        <span class="counter-digit" vid="93">9</span>
+                        <span class="counter-digit" vid="94">9</span>
+                        <span class="counter-digit" vid="95">9</span>
+                    </div>
+                </div>
+            </div>
+
+            
+            <div class="module-block" style="flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between;" vid="96">
+                <div vid="97">
+                    <div class="hardware-label" vid="98">COMMAND INPUT</div>
+                    <div class="action-pad" vid="99">
+                        <button class="btn-physical" vid="100">
+                            INSPECT
+                        </button>
+                        <button class="btn-physical" vid="101">
+                            LOGS
+                        </button>
+                        <button class="btn-physical btn-primary" vid="102">
+                            INITIALIZE MINT
+                        </button>
+                    </div>
+                </div>
+
+                
+                <div class="vent-detail" vid="103">
+                    <script vid="104">
+                        
+                        for(let i=0; i<32; i++) {
+                            document.write('<div class="vent-hole"></div>');
+                        }
+                    </script>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+</body></html>

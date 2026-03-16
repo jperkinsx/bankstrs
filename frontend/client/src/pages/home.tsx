@@ -1,7 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "wouter";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 import { Countdown } from "@/components/Countdown";
 import { PerplexityAttribution } from "@/components/PerplexityAttribution";
 import type { Bankstr, Stats } from "@shared/schema";
@@ -19,88 +17,74 @@ export default function Home() {
     <div className="mx-auto max-w-5xl px-4 py-12">
       {/* Hero */}
       <section data-testid="hero" className="pb-16 text-center">
-        <h1 className="font-mono text-xl font-bold tracking-widest text-primary">
+        <h1 className="text-xl font-bold tracking-widest text-[var(--text-muted)] uppercase" style={{ fontFamily: "var(--font-sans)" }}>
           BANKSTRS
         </h1>
-        <p className="mt-3 text-sm text-muted-foreground">
+        <p className="mt-3 font-mono text-sm text-[var(--text-muted)]">
           10,000 days. One Bankstr per day. Zero-reserve auction.
         </p>
       </section>
 
       {/* Stats */}
       <section data-testid="stats" className="grid grid-cols-1 gap-4 sm:grid-cols-3">
-        <Card>
-          <CardHeader className="pb-2">
-            <CardTitle className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
-              Day
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <span className="font-mono text-lg text-foreground">
-              #{stats?.currentDay ?? "—"}
-            </span>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardHeader className="pb-2">
-            <CardTitle className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
-              Total Minted
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <span className="font-mono text-lg text-foreground">
-              {stats?.totalMinted ?? "—"}
-            </span>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardHeader className="pb-2">
-            <CardTitle className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
-              Current Bid
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <span className="font-mono text-lg text-foreground">
-              {auction ? `${auction.highestBid} ETH` : "—"}
-            </span>
-          </CardContent>
-        </Card>
+        {[
+          { label: "Day", value: stats?.currentDay ? `#${stats.currentDay}` : "—" },
+          { label: "Total Minted", value: stats?.totalMinted ?? "—" },
+          { label: "Current Bid", value: auction ? `${auction.highestBid} ETH` : "—" },
+        ].map((stat) => (
+          <div key={stat.label} className="module-block">
+            <div className="module-header">
+              <span className="hardware-label">{stat.label}</span>
+              <div className="status-light" />
+            </div>
+            <div className="recessed-display">
+              <span className="font-mono text-lg text-[var(--neon-green)]" style={{ textShadow: "0 0 8px var(--neon-green-glow)" }}>
+                {stat.value}
+              </span>
+            </div>
+          </div>
+        ))}
       </section>
 
       {/* Today's Auction Preview */}
       {auction && (
         <section data-testid="auction-preview" className="mt-10">
-          <Card>
-            <CardContent className="flex flex-col items-center gap-6 p-6 sm:flex-row">
-              <div className="flex h-48 w-48 shrink-0 items-center justify-center rounded-lg border border-border bg-muted">
-                <span className="font-mono text-xs text-muted-foreground">
+          <div className="module-block">
+            <div className="module-header">
+              <span className="hardware-label">Today's Auction</span>
+              <div className="status-light" />
+            </div>
+            <div className="flex flex-col items-center gap-6 sm:flex-row">
+              <div className="crt-screen flex h-48 w-48 shrink-0 items-center justify-center p-4">
+                <div className="crt-grid" />
+                <span className="font-mono text-xs text-[var(--neon-green)] relative z-[2]" style={{ textShadow: "0 0 4px var(--neon-green-glow)" }}>
                   Bankstrs #{auction.day}
                 </span>
               </div>
               <div className="flex flex-col gap-3">
-                <h2 className="font-mono text-lg font-semibold text-foreground">
-                  Today's Auction
+                <h2 className="font-mono text-lg font-semibold text-[var(--text-bright)]">
+                  Bankstrs #{auction.day}
                 </h2>
-                <div className="flex items-center gap-4 text-sm text-muted-foreground">
+                <div className="flex items-center gap-4 text-sm text-[var(--text-muted)]">
                   <span>
-                    Bid: <span className="font-mono text-foreground">{auction.highestBid} ETH</span>
+                    Bid: <span className="font-mono text-[var(--neon-green)]" style={{ textShadow: "0 0 8px var(--neon-green-glow)" }}>{auction.highestBid} ETH</span>
                   </span>
                   <Countdown endTime={auction.auctionEndTime} />
                 </div>
                 <Link href="/auction">
-                  <Button data-testid="go-to-auction" size="sm">
+                  <button data-testid="go-to-auction" className="btn-physical btn-primary px-6 py-3">
                     View Auction
-                  </Button>
+                  </button>
                 </Link>
               </div>
-            </CardContent>
-          </Card>
+            </div>
+          </div>
         </section>
       )}
 
       {/* How It Works */}
       <section data-testid="how-it-works" className="mt-16">
-        <h2 className="mb-6 font-mono text-lg font-semibold text-foreground">
+        <h2 className="mb-6 font-mono text-lg font-semibold text-[var(--text-bright)]">
           How It Works
         </h2>
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
@@ -121,15 +105,15 @@ export default function Home() {
               desc: "The Bankstr is minted and auctioned for 24 hours. Revenue flows to the AI-managed treasury.",
             },
           ].map((item) => (
-            <Card key={item.step}>
-              <CardContent className="p-5">
-                <span className="font-mono text-xs text-primary">{item.step}</span>
-                <h3 className="mt-2 text-sm font-semibold text-foreground">
-                  {item.title}
-                </h3>
-                <p className="mt-1 text-xs text-muted-foreground">{item.desc}</p>
-              </CardContent>
-            </Card>
+            <div key={item.step} className="module-block">
+              <span className="font-mono text-sm font-bold text-[var(--molded-orange)]" style={{ textShadow: "0 0 8px rgba(255, 77, 0, 0.3)" }}>
+                {item.step}
+              </span>
+              <h3 className="mt-2 text-sm font-semibold text-[var(--text-bright)]">
+                {item.title}
+              </h3>
+              <p className="mt-1 text-xs text-[var(--text-muted)]">{item.desc}</p>
+            </div>
           ))}
         </div>
       </section>
