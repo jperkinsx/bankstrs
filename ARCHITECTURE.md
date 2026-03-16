@@ -25,7 +25,7 @@ Auction revenue flows to the BANKSTR Bankr Agent treasury on Base.
 - **NFT Collection + Auctions**: Ethereum Mainnet (or Base when Rare CLI adds full support)
 - **Bankr Agent**: Base mainnet (primary chain, gas sponsored)
 - **Treasury Bridge**: Auction ETH on Ethereum → bridge to Bankr agent wallet on Base
-- **$BNKSTR Token**: Launched via `bankr launch` on Base (done independently by team)
+- **$BNKSTRS Token**: Launched via `bankr launch` on Base (done independently by team)
 
 ---
 
@@ -208,7 +208,7 @@ rare auction settle \
 1. **Landing/Home** (`/`): Hero with project info, current auction preview, key stats
 2. **Auction** (`/auction`): Live auction with countdown, current bid, bidding interface via wagmi/viem
 3. **Gallery** (`/gallery`): Browse past Bankstrs with filtering
-4. **Agent** (`/agent`): Link to Bankr agent profile, $BNKSTR token info
+4. **Agent** (`/agent`): Link to Bankr agent profile, $BNKSTRS token info
 
 ### Wallet Integration
 - wagmi v2 + viem for wallet connection
@@ -286,7 +286,7 @@ jobs:
 
 ---
 
-## $BNKSTR Token Info Display
+## $BNKSTRS Token Info Display
 
 The frontend will display token info by linking to the Bankr agent profile page:
 - URL pattern: `https://bankr.bot/agents/{agent_wallet_address}`

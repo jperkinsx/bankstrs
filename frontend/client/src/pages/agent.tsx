@@ -14,13 +14,13 @@ export default function Agent() {
       {/* Token Info */}
       <div className="module-block">
         <div className="module-header">
-          <span className="hardware-label">$BNKSTR Token</span>
+          <span className="hardware-label">$BNKSTRS Token</span>
           <div className="status-light" />
         </div>
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
           <div className="recessed-display">
             <span className="hardware-label">Symbol</span>
-            <p className="font-mono text-sm text-[var(--neon-green)] mt-1" style={{ textShadow: "0 0 8px var(--neon-green-glow)" }}>$BNKSTR</p>
+            <p className="font-mono text-sm text-[var(--neon-green)] mt-1" style={{ textShadow: "0 0 8px var(--neon-green-glow)" }}>$BNKSTRS</p>
           </div>
           <div className="recessed-display">
             <span className="hardware-label">Market Cap</span>

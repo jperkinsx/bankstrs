@@ -54,7 +54,7 @@ Light mode:
 - Simple, clean grid layout
 
 ### 4. Agent Page (`/agent`)
-- Section with $BNKSTR token info placeholder (symbol, market cap TBD, contract TBD)
+- Section with $BNKSTRS token info placeholder (symbol, market cap TBD, contract TBD)
 - Prominent link/embed to the Bankr agent profile: "View Agent on Bankr" button that opens https://bankr.bot/agents/{address}
 - Brief explanation of the treasury flywheel: "Auction revenue flows to the BANKSTRS treasury on Base, managed by an autonomous Bankr AI Agent"
 - For now: use placeholder address 0x0000...0000 since the agent isn't deployed yet
